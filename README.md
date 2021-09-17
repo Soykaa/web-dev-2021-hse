@@ -1,1 +1,3 @@
-# web-dev-2021-hse
+# The hat
+
+Web version of **"The Hat"** game.
