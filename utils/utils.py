@@ -1,4 +1,4 @@
-from app.objects.user import User
+from objects.user import User
 
 
 def compare_users_by_rating(user1: User, user2: User):

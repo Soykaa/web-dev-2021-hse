@@ -1,7 +1,7 @@
 import queue
 from collections import deque
 
-from app.models.word_model import GameWord
+from models.word_model import GameWord
 
 
 class AllWords:

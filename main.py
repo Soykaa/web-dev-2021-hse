@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
 
-from app.models.word_model import GameWord
-from app.objects.all_users import AllUsers
-from app.objects.all_words import AllWords
-from app.objects.user import User
+from models.word_model import GameWord
+from objects.all_users import AllUsers
+from objects.all_words import AllWords
+from objects.user import User
 
 app = FastAPI()
 users = AllUsers()

@@ -1,5 +1,5 @@
-from app.models.word_model import GameWord
-from app.objects.word import Word
+from models.word_model import GameWord
+from objects.word import Word
 
 
 class User:
