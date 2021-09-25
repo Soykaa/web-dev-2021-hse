@@ -54,5 +54,5 @@ async def show_word():
 
 # view rating of all users
 @app.post("/game/rating")
-async def add_new_word():
+async def show_rating():
     return users.get_rating()
