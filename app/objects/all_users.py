@@ -1,4 +1,4 @@
-from utils.utils import compare_users_by_rating as compare
+from app.utils.utils import compare_users_by_rating as compare
 
 
 class AllUsers:

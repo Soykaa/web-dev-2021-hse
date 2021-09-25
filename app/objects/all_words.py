@@ -1,7 +1,6 @@
-import queue
 from collections import deque
 
-from models.word_model import GameWord
+from app.models.word_model import GameWord
 
 
 class AllWords:
@@ -11,6 +10,6 @@ class AllWords:
     def add_word(self, word: GameWord):
         self.words.append(word)
 
-    def get_next_word(self):
+    def get_next_word(self) -> GameWord:
         word = self.words.popleft()
         return word

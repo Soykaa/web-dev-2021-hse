@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
 
-from models.word_model import GameWord
-from objects.all_users import AllUsers
-from objects.all_words import AllWords
-from objects.user import User
+from app.models.word_model import GameWord
+from app.objects.all_users import AllUsers
+from app.objects.all_words import AllWords
+from app.objects.user import User
 
 app = FastAPI()
 users = AllUsers()
@@ -18,10 +18,11 @@ async def root():
 @app.get("/add_user")
 async def add_user():
     users.add_user(User())
+    return "Added a user with id:" + str(len(users.users) - 1)
 
 
 # guessed words of user with user_id
-@app.get("/users/{user_id}/words")
+@app.get("/users/{user_id}/guessed_words")
 async def get_items_amount(user_id: int):
     if user_id >= users.num_of_users():
         raise HTTPException(status_code=404, detail="User not found")
@@ -29,7 +30,7 @@ async def get_items_amount(user_id: int):
 
 
 # guess the word
-@app.post("/game/playground/{user_id}/words/add")
+@app.post("/game/playground/{user_id}/guess_word")
 async def guess_word(user_id: int, word: GameWord):
     if user_id >= users.num_of_users():
         raise HTTPException(status_code=404, detail="User not found")
@@ -45,7 +46,7 @@ async def add_new_word(word: GameWord):
 
 
 # show word
-@app.get("game/playground/")
+@app.post("/game/playground/")
 async def show_word():
     return hat.get_next_word()
 
