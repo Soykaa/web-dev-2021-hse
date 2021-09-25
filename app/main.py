@@ -15,6 +15,7 @@ async def root():
     return {"message": "Welcome to the 'Hat' game!"}
 
 
+# add new user
 @app.get("/add_user")
 async def add_user():
     users.add_user(User())
@@ -23,7 +24,7 @@ async def add_user():
 
 # guessed words of user with user_id
 @app.get("/users/{user_id}/guessed_words")
-async def get_items_amount(user_id: int):
+async def get_guessed_words(user_id: int):
     if user_id >= users.num_of_users():
         raise HTTPException(status_code=404, detail="User not found")
     return users.get_user(user_id).get_words()
