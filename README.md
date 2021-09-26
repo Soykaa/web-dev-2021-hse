@@ -1,3 +1,5 @@
 # The hat
 
-Web version of **"The Hat"** game.
+Для запуска тестов, напишите: 
+
+`pytest test/integration_tests.py test/unit_tests.py`
