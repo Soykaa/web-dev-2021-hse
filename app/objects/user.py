@@ -7,6 +7,10 @@ class User:
         self.guessed_words_by_cat = defaultdict(list)
         self.guessed_words = dict()
         self.rating = 0
+        self.id = -1
+
+    def get_rating(self):
+        return self.rating
 
     def add_guessed_word(self, word):
         guessed_word = Word(word.word, word.score, word.category)
@@ -15,9 +19,6 @@ class User:
             self.rating += word.score
             if word.category != "":
                 self.guessed_words_by_cat[word.category].append(guessed_word)
-
-    def get_rating(self):
-        return self.rating
 
     def get_words(self, category):
         if category != "":

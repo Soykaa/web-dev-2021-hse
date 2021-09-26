@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.models.word_model import GameWord, WordCategory
+from app.models.word_model import GameWord
 from app.objects.all_users import AllUsers
 from app.objects.all_words import AllWords
 from app.objects.user import User
@@ -30,14 +30,14 @@ async def get_guessed_words(user_id: int, category):
 
 # guess the word
 @app.post("/game/playground/{user_id}/guess_word")
-async def guess_word(user_id: int, word: GameWord):
+async def guess_word(user_id: int, word):
     users.get_user(user_id).add_guessed_word(word)
     return "Added a word with score:" + str(word.score)
 
 
 # add word to the hat
 @app.post("/game/words/add")
-async def add_new_word(word: GameWord):
+async def add_new_word(word):
     hat.add_word(word)
     return "Added a word with score:" + str(word.score)
 
