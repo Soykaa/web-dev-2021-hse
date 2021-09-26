@@ -1,3 +1,6 @@
+from fastapi import HTTPException
+
+from app.main import users
 from app.utils.utils import compare_users_by_rating as compare
 
 
@@ -12,6 +15,8 @@ class AllUsers:
         self.users.append(user)
 
     def get_user(self, user_id):
+        if user_id >= users.num_of_users():
+            raise HTTPException(status_code=404, detail="User not found")
         return self.users[user_id]
 
     def get_rating(self):
