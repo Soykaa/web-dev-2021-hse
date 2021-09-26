@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 
-from app.utils.utils import compare_users_by_rating as compare, compare_users_by_rating
+from app.utils.utils import compare_users_by_rating
 
 
 class AllUsers:

@@ -50,18 +50,10 @@ def test_rating_after_init():
     assert (test_user.get_rating() == 0)
 
 
-def test_rating_same_words():
+def test_rating_after_changing():
     test_user = User()
-    test_user.add_guessed_word(Word("tree", 100, "nature"))
-    test_user.add_guessed_word(Word("tree", 100, "nature"))
+    test_user.rating += 100
     assert (test_user.get_rating() == 100)
-
-
-def test_rating_different_words():
-    test_user = User()
-    test_user.add_guessed_word(Word("tree", 100, "nature"))
-    test_user.add_guessed_word(Word("bear", 200, "nature"))
-    assert (test_user.get_rating() == 300)
 
 
 def test_words_after_init():
@@ -74,9 +66,9 @@ def test_words_without_category():
     word1 = Word("school", 100, "")
     word2 = Word("bird", 100, "")
     word3 = Word("summary", 100, "")
-    test_user.add_guessed_word(word1)
-    test_user.add_guessed_word(word2)
-    test_user.add_guessed_word(word3)
+    test_user.guessed_words[word1.word] = word1
+    test_user.guessed_words[word2.word] = word2
+    test_user.guessed_words[word3.word] = word3
     expected = [word1.word, word2.word, word3.word]
     actual = list(test_user.get_words("").keys())
     assert (actual == expected)
