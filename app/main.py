@@ -1,13 +1,24 @@
-from fastapi import FastAPI
-
-from app.models.word_model import GameWord
 from app.objects.all_users import AllUsers
 from app.objects.all_words import AllWords
 from app.objects.user import User
 
+import graphene
+from fastapi import FastAPI
+from starlette.graphql import GraphQLApp
+
+
+class Query(graphene.ObjectType):
+    hello = graphene.String(name=graphene.String(default_value="stranger"))
+
+    def resolve_hello(self, info, name):
+        return "Hello " + name
+
+
 app = FastAPI()
 users = AllUsers()
 hat = AllWords()
+
+app.add_route("/", GraphQLApp(schema=graphene.Schema(query=Query)))
 
 
 @app.get("/")
