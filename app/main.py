@@ -1,4 +1,4 @@
-from app.models.query_model import Query
+from app.models.graphql.query_model import Query
 from app.objects.entity_manager import EntityManager
 from app.objects.user import User
 

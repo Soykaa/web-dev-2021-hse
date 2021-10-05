@@ -1,0 +1,2 @@
+WIN_RECORDS_LIMIT = 366
+DATE_FORMAT = "%Y-%m-%d"

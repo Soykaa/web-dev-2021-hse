@@ -9,7 +9,7 @@ from app.objects.word import Word
 def test_guess_word():
     hat = AllWords()
     users = AllUsers()
-    users.add_user(User())
+    users.add_user(User("Sarah"))
     user = users.get_user(0)
     # add word to the hat
     hat.add_word(Word("flower", 100, "summer"))
@@ -23,8 +23,8 @@ def test_guess_word():
 def test_guess_word_and_change_pos_in_rating():
     hat = AllWords()
     users = AllUsers()
-    users.add_user(User())
-    users.add_user(User())
+    users.add_user(User("Jane"))
+    users.add_user(User("Kate"))
     user1 = users.get_user(0)
     user2 = users.get_user(0)
     # add word to the hat
@@ -42,7 +42,7 @@ def test_guess_word_and_change_pos_in_rating():
 def test_guess_and_get_words():
     hat = AllWords()
     users = AllUsers()
-    users.add_user(User())
+    users.add_user(User("John"))
     user1 = users.get_user(0)
     # add word to the hat
     hat.add_word(Word("flower", 500, "spring"))

@@ -10,7 +10,7 @@ from app.objects.word import Word
 
 
 def test_guessed_word_adding_with_cat():
-    test_user = User()
+    test_user = User("Billie")
     word = Word("tree", 100, "nature")
     test_user.add_guessed_word(word)
     assert (test_user.guessed_words_by_cat["nature"][0].word == "tree")
@@ -19,7 +19,7 @@ def test_guessed_word_adding_with_cat():
 
 
 def test_guessed_word_adding_without_cat():
-    test_user = User()
+    test_user = User("Sam")
     test_string = "nothing"
     word = Word("tree", 100, "")
     test_user.add_guessed_word(word)
@@ -31,7 +31,7 @@ def test_guessed_word_adding_without_cat():
 
 
 def test_guessed_word_adding_with_cat_twice():
-    test_user = User()
+    test_user = User("Bob")
     word = Word("tree", 100, "nature")
     word2 = Word("tree", 100, "nature")
     test_user.add_guessed_word(word)
@@ -46,23 +46,23 @@ def test_guessed_word_adding_with_cat_twice():
 
 
 def test_rating_after_init():
-    test_user = User()
+    test_user = User("Alice")
     assert (test_user.get_rating() == 0)
 
 
 def test_rating_after_changing():
-    test_user = User()
+    test_user = User("Clover")
     test_user.rating += 100
     assert (test_user.get_rating() == 100)
 
 
 def test_words_after_init():
-    test_user = User()
+    test_user = User("Alex")
     assert (test_user.get_words(Category("")) == [])
 
 
 def test_words_without_category():
-    test_user = User()
+    test_user = User("Will")
     word1 = Word("school", 100, "")
     word2 = Word("bird", 100, "")
     word3 = Word("summary", 100, "")
@@ -75,7 +75,7 @@ def test_words_without_category():
 
 
 def test_words_with_category():
-    test_user = User()
+    test_user = User("Jacob")
     word1 = Word("school", 100, "study")
     word2 = Word("bird", 100, "animals")
     word3 = Word("pencil", 100, "study")
@@ -97,9 +97,9 @@ def test_adding_user_zero_users():
 
 def test_adding_user_three_users():
     test_users = AllUsers()
-    user1 = User()
-    user2 = User()
-    user3 = User()
+    user1 = User("Ashley")
+    user2 = User("Oliver")
+    user3 = User("Laura")
     test_users.add_user(user1)
     test_users.add_user(user2)
     test_users.add_user(user3)
@@ -113,8 +113,8 @@ def test_num_of_users_zero_users():
 
 def test_adding_user_two_users():
     test_users = AllUsers()
-    user1 = User()
-    user2 = User()
+    user1 = User("Jackie")
+    user2 = User("Ronald")
     test_users.add_user(user1)
     test_users.add_user(user2)
     assert (test_users.num_of_users() == 2)
@@ -123,7 +123,7 @@ def test_adding_user_two_users():
 def test_get_user_no_such_id_too_big():
     with pytest.raises(HTTPException):
         test_users = AllUsers()
-        user1 = User()
+        user1 = User("Harry")
         test_users.add_user(user1)
         test_users.get_user(10)
 
@@ -131,16 +131,16 @@ def test_get_user_no_such_id_too_big():
 def test_get_user_no_such_id_neg():
     with pytest.raises(HTTPException):
         test_users = AllUsers()
-        user1 = User()
+        user1 = User("Lily")
         test_users.add_user(user1)
         test_users.get_user(-2)
 
 
 def test_get_user_such_id_exists():
     test_users = AllUsers()
-    user1 = User()
-    user2 = User()
-    user3 = User()
+    user1 = User("James")
+    user2 = User("Angelina")
+    user3 = User("Fred")
     test_users.add_user(user1)
     test_users.add_user(user2)
     test_users.add_user(user3)
@@ -149,13 +149,13 @@ def test_get_user_such_id_exists():
 
 def test_get_global_rating():
     test_users = AllUsers()
-    user1 = User()
+    user1 = User("George")
     user1.rating = 200
-    user2 = User()
+    user2 = User("Luna")
     user2.rating = 100
-    user3 = User()
+    user3 = User("William")
     user3.rating = 200
-    user4 = User()
+    user4 = User("Beth")
     user4.rating = 300
     test_users.add_user(user1)
     test_users.add_user(user2)
