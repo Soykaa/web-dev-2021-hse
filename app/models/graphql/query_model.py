@@ -9,9 +9,9 @@ class Query(ObjectType):
     record_by_date = Field(StorageRecord, date=Date(required=True))
 
     def resolve_record_by_date(self, info, date):
-        storage_record: Winner = EntityManager.users.storage.get(date)
+        winner = EntityManager.users.storage.get(date)
 
-        if storage_record is not None:
-            return StorageRecord(winner=Winner(storage_record.id, storage_record.rating, storage_record.name),
+        if winner is not None:
+            return StorageRecord(winner=Winner(winner.id, winner.rating, winner.name),
                                  win_date=date)
         return None
