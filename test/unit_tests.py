@@ -1,12 +1,16 @@
+from datetime import datetime, date, time
+
 import pytest
 
 from fastapi import HTTPException
 
+from app.models.graphql.winner_model import Winner
 from app.objects.all_users import AllUsers
 from app.objects.all_words import AllWords
 from app.objects.category import Category
 from app.objects.user import User
 from app.objects.word import Word
+from app.utils.constants import DATE_FORMAT
 
 
 def test_guessed_word_adding_with_cat():
@@ -190,8 +194,8 @@ def test_show_next_word():
     test_hat.add_word(word2)
     test_hat.add_word(word3)
     next_word = test_hat.get_next_word()
-    assert(next_word.word == "school")
-    assert(len(test_hat.words) == 2)
+    assert (next_word.word == "school")
+    assert (len(test_hat.words) == 2)
     next_word = test_hat.get_next_word()
     assert (next_word.word == "bird")
     assert (len(test_hat.words) == 1)
@@ -201,6 +205,61 @@ def test_show_next_word():
     next_word = test_hat.get_next_word()
     assert (next_word.word == "")
     assert (len(test_hat.words) == 0)
+
+
+def test_add_to_storage():
+    test_users = AllUsers()
+    win_date = "2001-04-28"
+    winner1 = User("Kate")
+    test_users.storage.add(win_date, winner1)
+    assert (len(test_users.storage.storage) == 1)
+    assert (len(test_users.storage.win_dates) == 1)
+    assert (test_users.storage.storage[date(2001, 4, 28)].name == "Kate")
+
+
+def test_add_to_storage_dif_dates():
+    test_users = AllUsers()
+    win_date1 = "2001-04-28"
+    win_date2 = "2001-04-29"
+    winner1 = User("Kate")
+    winner2 = User("Julia")
+    test_users.storage.add(win_date1, winner1)
+    assert (len(test_users.storage.storage) == 1)
+    assert (len(test_users.storage.win_dates) == 1)
+    assert (test_users.storage.storage[date(2001, 4, 28)].name == "Kate")
+    test_users.storage.add(win_date2, winner2)
+    assert (len(test_users.storage.storage) == 2)
+    assert (len(test_users.storage.win_dates) == 2)
+    assert (test_users.storage.storage[date(2001, 4, 29)].name == "Julia")
+
+
+def test_add_to_storage_same_dates():
+    test_users = AllUsers()
+    win_date = "2001-04-28"
+    winner1, winner2 = User("Kate"), User("Julia")
+    test_users.storage.add(win_date, winner1)
+    assert (len(test_users.storage.storage) == 1)
+    assert (len(test_users.storage.win_dates) == 1)
+    assert (test_users.storage.storage[date(2001, 4, 28)].name == "Kate")
+    test_users.storage.add(win_date, winner2)
+    assert (len(test_users.storage.storage) == 1)
+    assert (len(test_users.storage.win_dates) == 1)
+    assert (test_users.storage.storage[date(2001, 4, 28)].name == "Julia")
+
+
+def test_get_no_such_key():
+    test_users = AllUsers()
+    win_date = "2001-04-28"
+    assert (len(test_users.storage.storage) == 0)
+    assert (len(test_users.storage.win_dates) == 0)
+    assert (test_users.storage.storage.get(win_date) is None)
+
+
+def test_get_such_key_exists():
+    test_users = AllUsers()
+    test_users.storage.storage["1996-03-15"] = Winner(1, 20, "Max")
+    assert (len(test_users.storage.storage) == 1)
+    assert (test_users.storage.storage.get("1996-03-15").name == "Max")
 
 
 if __name__ == '__main__':
