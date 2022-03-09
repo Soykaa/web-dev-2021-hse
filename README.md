@@ -1,5 +1,5 @@
-# The hat
+# The hat - backend part
 
-Для запуска тестов, напишите: 
+To run the tests, write: 
 
 `pytest test/integration_tests.py test/unit_tests.py`
