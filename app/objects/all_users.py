@@ -1,11 +1,15 @@
 from fastapi import HTTPException
 
+from app.objects.storage import WinnersStorage
 from app.utils.utils import compare_users_by_rating
 
 
 class AllUsers:
     def __init__(self):
         self.users = list()
+        self.top_user_rating = 0
+        self.top_user_id = -1
+        self.storage = WinnersStorage()
 
     def num_of_users(self):
         return len(self.users)
@@ -21,3 +25,6 @@ class AllUsers:
 
     def get_rating(self):
         return sorted(self.users, key=compare_users_by_rating)
+
+    def set_top_user_rating(self, rating):
+        self.top_user_rating = rating

@@ -1,5 +1,2 @@
-from app.objects.user import User
-
-
-def compare_users_by_rating(user: User):
+def compare_users_by_rating(user):
     return -user.rating
